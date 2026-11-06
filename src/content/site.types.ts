@@ -8,6 +8,34 @@ export type Social = {
   handle: string
 }
 
+/**
+ * One piece of the display headline. Chips are clickable circular
+ * snapshots that open a full-size mosaic in a dialog; the portrait is a
+ * placeholder for a personal photo.
+ */
+export type HeroToken =
+  | { kind: 'text'; text: string; italic?: boolean }
+  | {
+      kind: 'chip'
+      /** Full-size image, shown in the dialog. */
+      src: string
+      /** Smaller file for the inline circle. Falls back to `src`. */
+      thumb?: string
+      alt: string
+      caption: string
+      /** CSS object-position for the circular crop. */
+      focus?: string
+      /** Optional zoom, for wide screenshots whose subject is small. */
+      zoom?: number
+      /** Intrinsic ratio, used for the dialog and its mosaic grid. */
+      aspect?: readonly [number, number]
+      credit?: string
+      creditHref?: string
+    }
+
+/** A chip token that carries an image — what the lightbox receives. */
+export type HeroChipToken = Extract<HeroToken, { kind: 'chip' }>
+
 /** One screenshot in a case study. */
 export type ProjectShot = {
   /** Path under /public. */
@@ -57,8 +85,11 @@ export type SiteContent = {
   timeZone: string
   hero: {
     eyebrow: string
-    headline: string
     lead: string
+    /** The display headline, one entry per rendered line. */
+    display: HeroToken[][]
+    /** Project slugs shown in the tilted screens at the bottom of the hero. */
+    visuals: string[]
   }
   about: {
     intro: string
