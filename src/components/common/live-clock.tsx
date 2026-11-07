@@ -16,7 +16,7 @@ export function LiveClock({ timeZone, label }: LiveClockProps) {
     <p className="mono-label flex items-center gap-2 tabular-nums">
       <span aria-hidden className="size-1 rounded-full bg-live" />
       <span>
-        {time} <span className="text-muted-foreground/60">{offset}</span>
+        {time} <span className="text-muted-foreground">{offset}</span>
       </span>
       <span className="sr-only">local time in {label}</span>
     </p>

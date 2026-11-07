@@ -67,16 +67,16 @@ export const site: SiteContent = {
 
   about: {
     intro:
-      'Most of my day is React, TypeScript and CSS. The rest is untangling a data flow so the interface stops guessing.',
+      'Most of my day is React, TypeScript and CSS. The rest is untangling a data flow until the interface stops guessing.',
     detail:
-      'I like the work that sits between product and implementation: turning a rough spec into something testable, making the loading state honest, keeping the bundle from creeping. I care about the parts people feel — speed, clarity, and never losing their work.',
+      'I build interfaces that are honest about what they’re doing: loading states that mean it, errors a person can act on, components that hold once a team starts depending on them. Speed, clarity and never losing your work are the parts people actually feel. Off the clock I play football badly, support Chelsea, and build side projects nobody asked for. Batman: The Animated Series is on in the background. I stopped following City when Pep left. The game’s gone.',
     focus: [
-      'Product delivery',
-      'React & TypeScript',
-      'Performance',
-      'Accessibility',
+      'Product engineering',
+      'Interface states',
       'Data fetching & state',
       'Design systems',
+      'Performance budgets',
+      'Accessibility',
     ],
   },
 
