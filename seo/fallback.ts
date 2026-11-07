@@ -43,3 +43,10 @@ export function projectFallback(project: Project, baseUrl: string): string {
     `<p><a href="${escapeHtml(project.url)}">Visit ${escapeHtml(project.title)}</a></p>`,
   ])
 }
+
+export function notFoundFallback(baseUrl: string): string {
+  return wrap([
+    `<h1>Page not found</h1>`,
+    `<p>That page does not exist. <a href="${absoluteUrl('/', baseUrl)}">Back to the work</a>.</p>`,
+  ])
+}

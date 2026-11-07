@@ -2,8 +2,8 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import path from 'node:path'
 import type { Connect, Plugin } from 'vite'
 import { site } from '../src/content/site.ts'
-import { homeSeo, projectSeo } from '../src/lib/seo-data.ts'
-import { homeFallback, projectFallback } from './fallback.ts'
+import { homeSeo, notFoundSeo, projectSeo } from '../src/lib/seo-data.ts'
+import { homeFallback, notFoundFallback, projectFallback } from './fallback.ts'
 import { llmsFullTxt, llmsTxt, robotsTxt, sitemapXml } from './files.ts'
 import { renderHead } from './head.ts'
 import {
@@ -41,9 +41,10 @@ function serveFiles(middlewares: Connect.Server, files: Map<string, string>) {
 }
 
 /**
- * Emits robots.txt, sitemap.xml, llms.txt, llms-full.txt and one static HTML
- * shell per case study, so crawlers get real per-page metadata without running
- * the app. Runs after Vite has written the build, when `index.html` is final.
+ * Emits robots.txt, sitemap.xml, llms.txt, llms-full.txt, a noindex 404 shell
+ * and one static HTML shell per case study, so crawlers get real per-page
+ * metadata without running the app. Runs after Vite has written the build,
+ * when `index.html` is final.
  */
 export function seoPlugin(options: SeoPluginOptions = {}): Plugin {
   const baseUrl = (options.siteUrl || site.seo.url).replace(/\/+$/, '')
@@ -101,6 +102,13 @@ export function seoPlugin(options: SeoPluginOptions = {}): Plugin {
         mkdirSync(path.dirname(target), { recursive: true })
         writeFileSync(target, shell, 'utf8')
       }
+
+      // Vercel and Pxxl both serve 404.html for unmatched paths, so unknown
+      // URLs get a real 404 status and still boot the client-side 404 page.
+      const notFoundHead = replaceRegion(html, SEO_START, SEO_END, renderHead(notFoundSeo(baseUrl), baseUrl))
+      const notFoundShell = replaceRegion(notFoundHead, FALLBACK_START, FALLBACK_END, notFoundFallback(baseUrl))
+
+      writeFileSync(path.join(outDir, '404.html'), notFoundShell, 'utf8')
 
       for (const [fileName, source] of files) {
         writeFileSync(path.join(outDir, fileName), source, 'utf8')

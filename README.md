@@ -98,7 +98,11 @@ project is still one object — the sitemap, the case-study HTML shell and
 - **Crawler files** — `dist/robots.txt`, `dist/sitemap.xml`, `dist/llms.txt` and
   `dist/llms-full.txt`. The Vite plugin serves the same files in dev, so
   `http://localhost:5173/llms.txt` works while you edit copy.
-- **404** — the not-found route is `noindex, follow` and carries no canonical.
+- **404** — `dist/404.html` is `noindex, follow` with no canonical, so unknown
+  URLs return a real 404 status and still boot the client-side 404 page.
+- **Hosts** — `vercel.json` handles Vercel (`cleanUrls`, cache headers) and
+  `pxxl.toml` handles smartlify.xyz on Pxxl (SPA fallback, cache headers). No
+  catch-all rewrite is needed on either: every real route has a static file.
 
 The canonical origin lives in `site.seo.url`. Override it per environment with
 `VITE_SITE_URL`:
