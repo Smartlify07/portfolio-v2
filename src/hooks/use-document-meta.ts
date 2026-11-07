@@ -1,9 +1,15 @@
 import { useEffect } from 'react'
-import { applyDocumentMeta } from '@/lib/seo'
+import type { SeoMeta } from '@/lib/seo-data'
+import { applySeo } from '@/lib/seo'
 
-/** Route-level document title and description. */
-export function useDocumentMeta(title: string, description: string) {
+/**
+ * Route-level head tags: title, description, canonical, social cards, JSON-LD.
+ * The serialized key keeps the effect from re-running on every render.
+ */
+export function useDocumentMeta(meta: SeoMeta) {
+  const key = JSON.stringify(meta)
+
   useEffect(() => {
-    applyDocumentMeta({ title, description })
-  }, [title, description])
+    applySeo(JSON.parse(key) as SeoMeta)
+  }, [key])
 }

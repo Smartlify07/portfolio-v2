@@ -1,4 +1,4 @@
-import type { SiteContent } from './site.types'
+import type { SiteContent } from './site.types.ts'
 
 /**
  * ─────────────────────────────────────────────────────────────
@@ -102,9 +102,13 @@ export const site: SiteContent = {
   ],
 
   socials: [
-    { label: 'GitHub', href: 'https://github.com/', handle: '@obinna' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/', handle: 'in/obinna' },
-    { label: 'X', href: 'https://x.com/', handle: '@obinna' },
+    { label: 'GitHub', href: 'https://github.com/Smartlify07/', handle: '@Smartlify07' },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/obinna-anosike-3326aa318/',
+      handle: 'in/obinna-anosike',
+    },
+    { label: 'X', href: 'https://x.com/Smartlify01', handle: '@Smartlify01' },
     { label: 'Email', href: 'mailto:obinna.anosike.dev@gmail.com', handle: 'obinna.anosike.dev@gmail.com' },
   ],
 
@@ -382,6 +386,21 @@ export const site: SiteContent = {
   ],
 
   seo: {
+    url: 'https://smartlify.xyz',
+    image: '/images/og.png',
+    locale: 'en_NG',
+    keywords: [
+      'Obinna Anosike',
+      'frontend engineer Lagos',
+      'React developer Nigeria',
+      'TypeScript developer',
+      'frontend portfolio',
+      'product interface engineering',
+      'design systems',
+      'web performance',
+      'accessibility',
+      'Next.js developer',
+    ],
     title: 'Obinna Anosike — Frontend Engineer',
     description:
       'Frontend engineer building product interfaces in React and TypeScript — fast, accessible, and shipped.',

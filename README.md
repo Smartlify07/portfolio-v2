@@ -82,6 +82,35 @@ is still in `src/index.css`; add `class="dark"` to `<html>` to switch themes.
 respects `prefers-reduced-motion`. Hover previews are cursor-only, so touch
 devices never get a ghost card.
 
+## SEO and AI discovery
+
+Everything is generated at build time from `src/content/site.ts`, so adding a
+project is still one object — the sitemap, the case-study HTML shell and
+`llms.txt` all pick it up.
+
+- **Meta** — title, description, keywords, canonical, Open Graph, Twitter cards
+  and JSON-LD (Person, WebSite, CreativeWork, BreadcrumbList) are set per route
+  at runtime and baked into the static HTML at build time.
+- **Static shells** — `pnpm build` writes `dist/work/<slug>.html` with the route's
+  head tags and a `<noscript>` summary, so crawlers get real per-page metadata
+  without executing the app. `vercel.json` enables `cleanUrls`, so they serve at
+  `/work/<slug>`.
+- **Crawler files** — `dist/robots.txt`, `dist/sitemap.xml`, `dist/llms.txt` and
+  `dist/llms-full.txt`. The Vite plugin serves the same files in dev, so
+  `http://localhost:5173/llms.txt` works while you edit copy.
+- **404** — the not-found route is `noindex, follow` and carries no canonical.
+
+The canonical origin lives in `site.seo.url`. Override it per environment with
+`VITE_SITE_URL`:
+
+```bash
+VITE_SITE_URL=https://preview.smartlify.xyz pnpm build
+```
+
+`site.socials` feeds the footer, the `sameAs` list in the Person schema and the
+`twitter:site` card attribution. The Open Graph image is
+`public/images/og.png` (1200×630).
+
 ## Checks
 
 ```bash

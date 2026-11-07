@@ -103,5 +103,13 @@ export type SiteContent = {
   seo: {
     title: string
     description: string
+    /** Canonical origin, no trailing slash. `VITE_SITE_URL` overrides it. */
+    url: string
+    /** Social preview image, relative to `/public`. */
+    image: string
+    /** Open Graph locale, e.g. `en_NG`. */
+    locale: string
+    /** Terms the site should be discoverable for. Feeds the meta tag and llms.txt. */
+    keywords: string[]
   }
 }

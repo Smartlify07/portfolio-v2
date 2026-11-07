@@ -1,9 +1,10 @@
-import { site } from '@/content/site'
 import { NotFoundBlock } from '@/components/common/not-found-block'
 import { useDocumentMeta } from '@/hooks/use-document-meta'
+import { notFoundSeo } from '@/lib/seo-data'
+import { siteUrl } from '@/lib/site-url'
 
 export function NotFoundPage() {
-  useDocumentMeta(`Not found — ${site.name}`, site.seo.description)
+  useDocumentMeta(notFoundSeo(siteUrl))
 
   return <NotFoundBlock />
 }

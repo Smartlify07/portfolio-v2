@@ -8,6 +8,8 @@ import { ProjectPoster } from '@/components/work/project-poster'
 import { WorkBody } from '@/components/work/work-body'
 import { WorkMeta } from '@/components/work/work-meta'
 import { useDocumentMeta } from '@/hooks/use-document-meta'
+import { notFoundSeo, projectSeo } from '@/lib/seo-data'
+import { siteUrl } from '@/lib/site-url'
 
 export function WorkDetailPage() {
   const { slug } = useParams()
@@ -15,10 +17,7 @@ export function WorkDetailPage() {
   const project = index === -1 ? null : site.projects[index]
   const next = site.projects[(index + 1) % site.projects.length]
 
-  useDocumentMeta(
-    project ? `${project.title} — ${site.name}` : `Not found — ${site.name}`,
-    project?.summary ?? site.seo.description,
-  )
+  useDocumentMeta(project ? projectSeo(project, siteUrl) : notFoundSeo(siteUrl))
 
   if (!project) return <NotFoundBlock />
 
