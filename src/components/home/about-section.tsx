@@ -2,6 +2,7 @@ import { site } from '@/content/site'
 import { SectionHeading } from '@/components/common/section-heading'
 import { Reveal } from '@/components/motion/reveal'
 import { Badge } from '@/components/ui/badge'
+import { AboutInlineImage } from '@/components/home/about-inline-image'
 
 export function AboutSection() {
   return (
@@ -13,7 +14,15 @@ export function AboutSection() {
           <p className="max-w-[34ch] text-xl leading-snug font-medium tracking-[-0.015em] text-balance sm:text-2xl">
             {site.about.intro}
           </p>
-          <p className="max-w-[52ch] leading-relaxed text-muted-foreground">{site.about.detail}</p>
+          <p className="max-w-[52ch] leading-8 text-muted-foreground">
+            {site.about.detail.map((segment, index) =>
+              segment.kind === 'text' ? (
+                <span key={index}>{segment.text}</span>
+              ) : (
+                <AboutInlineImage key={index} image={segment} />
+              ),
+            )}
+          </p>
         </Reveal>
 
         <Reveal delay={0.06} className="grid gap-10 sm:grid-cols-2 lg:grid-cols-1">

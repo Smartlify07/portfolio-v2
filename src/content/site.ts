@@ -68,8 +68,60 @@ export const site: SiteContent = {
   about: {
     intro:
       'Most of my day is React, TypeScript and CSS. The rest is untangling a data flow until the interface stops guessing.',
-    detail:
-      'I build interfaces that are honest about what they’re doing: loading states that mean it, errors a person can act on, components that hold once a team starts depending on them. Speed, clarity and never losing your work are the parts people actually feel. Off the clock I play football badly, support Chelsea, and build side projects nobody asked for. Batman: The Animated Series is on in the background. I stopped following City when Pep left. The game’s gone.',
+    detail: [
+      {
+        kind: 'text',
+        text: 'I build interfaces that are honest about what they’re doing: loading states that mean it, errors a person can act on, components that hold once a team starts depending on them. Speed, clarity and never losing your work are the parts people actually feel. Off the clock I play football badly ',
+      },
+      {
+        kind: 'image',
+        src: '/images/about/football.jpg',
+        alt: 'Two players sliding into a tackle on a muddy amateur pitch',
+        focus: '55% 50%',
+        credit: '“Rothesay Brandanes 5–2 Gartcosh FC” by Alasdair Middleton, CC BY 2.0',
+        creditHref: 'https://www.flickr.com/photos/46339582@N00/4412088999',
+      },
+      { kind: 'text', text: ', support Chelsea ' },
+      {
+        kind: 'image',
+        src: '/images/about/chelsea.jpg',
+        alt: 'Stamford Bridge, with CHELSEA spelled out across the blue seats',
+        focus: '50% 72%',
+        credit: '“Stamford Bridge stadium” by Andrewi, CC BY-SA 3.0',
+        creditHref: 'https://commons.wikimedia.org/wiki/File:Stamford_Bridge_stadium.jpg',
+      },
+      { kind: 'text', text: ', and build side projects nobody asked for ' },
+      {
+        kind: 'image',
+        src: '/images/about/side-projects.jpg',
+        alt: 'A laptop showing code beside a mug of coffee',
+        focus: '68% 45%',
+        credit: '“Programmer’s Laptop” by Wallboat, CC0',
+        creditHref: 'https://www.flickr.com/photos/151415985@N06/36819065315',
+      },
+      { kind: 'text', text: '. Batman: The Animated Series ' },
+      {
+        kind: 'image',
+        src: '/images/about/batman-tas.png',
+        alt: 'The Batman: The Animated Series title card',
+        credit: '“Batman: The Animated Series” wordmark, public domain',
+        creditHref: 'https://commons.wikimedia.org/wiki/File:Batman-_The_Animated_Series_logo.svg',
+      },
+      {
+        kind: 'text',
+        text: ' is on in the background. I stopped following City when Pep left ',
+      },
+      {
+        kind: 'image',
+        src: '/images/about/pep.jpg',
+        alt: 'Pep Guardiola at a press conference',
+        focus: '50% 25%',
+        credit: '“Josep Guardiola, RB Leipzig vs Manchester City” by Steffen Prößdorf, CC BY-SA 4.0',
+        creditHref:
+          'https://commons.wikimedia.org/wiki/File:Josep_Guardiola_2023-10-04_Fu%C3%9Fball%2C_M%C3%A4nner%2C_UEFA_Champions_League%2C_RB_Leipzig_-_Manchester_City_FC_1DX_2797_(cropped).jpg',
+      },
+      { kind: 'text', text: '. The game’s gone.' },
+    ],
     focus: [
       'Product engineering',
       'Interface states',

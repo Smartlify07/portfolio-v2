@@ -36,6 +36,24 @@ export type HeroToken =
 /** A chip token that carries an image — what the lightbox receives. */
 export type HeroChipToken = Extract<HeroToken, { kind: 'chip' }>
 
+/**
+ * One run of the About paragraph: a piece of text or a small square image
+ * that sits inline with it, after the word it illustrates.
+ */
+export type AboutImageSegment = {
+  kind: 'image'
+  /** Path under /public. */
+  src: string
+  alt: string
+  /** CSS object-position for the square crop. */
+  focus?: string
+  /** Attribution, mirrored in /public/images/CREDITS.md. */
+  credit?: string
+  creditHref?: string
+}
+
+export type AboutSegment = { kind: 'text'; text: string } | AboutImageSegment
+
 /** One screenshot in a case study. */
 export type ProjectShot = {
   /** Path under /public. */
@@ -93,7 +111,8 @@ export type SiteContent = {
   }
   about: {
     intro: string
-    detail: string
+    /** The paragraph, split into text runs and inline images. */
+    detail: AboutSegment[]
     focus: string[]
   }
   stack: string[]

@@ -1,6 +1,7 @@
 import { site } from '../src/content/site.ts'
 import type { Project } from '../src/content/site.types.ts'
 import { absoluteUrl } from '../src/lib/seo-data.ts'
+import { aboutDetailText } from './about-text.ts'
 import { escapeHtml } from './html.ts'
 
 const STYLE =
@@ -24,7 +25,7 @@ export function homeFallback(baseUrl: string): string {
     `<p><strong>${escapeHtml(site.name)}</strong> — ${escapeHtml(site.role)}, ${escapeHtml(site.location)}.</p>`,
     `<p>${escapeHtml(site.hero.lead)}</p>`,
     `<h2>Work</h2><ul>${work}</ul>`,
-    `<h2>About</h2><p>${escapeHtml(site.about.intro)} ${escapeHtml(site.about.detail)}</p>`,
+    `<h2>About</h2><p>${escapeHtml(site.about.intro)} ${escapeHtml(aboutDetailText(site.about.detail))}</p>`,
     `<p>Email: <a href="mailto:${site.email}">${site.email}</a></p>`,
   ])
 }

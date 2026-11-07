@@ -1,5 +1,6 @@
 import { site } from '../src/content/site.ts'
 import { absoluteUrl } from '../src/lib/seo-data.ts'
+import { aboutDetailText } from './about-text.ts'
 
 /** Answer engines and AI crawlers we explicitly welcome. */
 const AI_AGENTS = [
@@ -123,7 +124,7 @@ export function llmsFullTxt(baseUrl: string): string {
     '',
     site.about.intro,
     '',
-    site.about.detail,
+    aboutDetailText(site.about.detail),
     '',
     `Focus: ${site.about.focus.join(', ')}.`,
     '',
