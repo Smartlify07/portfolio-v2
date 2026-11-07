@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import type { Connect, Plugin } from 'vite'
 import { site } from '../src/content/site.ts'
@@ -54,12 +54,14 @@ export function seoPlugin(options: SeoPluginOptions = {}): Plugin {
     ['llms-full.txt', llmsFullTxt(baseUrl)],
   ])
   let outDir = ''
+  let projectRoot = ''
 
   return {
     name: 'portfolio-seo',
 
     configResolved(config) {
       outDir = path.resolve(config.root, config.build.outDir)
+      projectRoot = config.root
     },
 
     transformIndexHtml: {
@@ -103,6 +105,12 @@ export function seoPlugin(options: SeoPluginOptions = {}): Plugin {
       for (const [fileName, source] of files) {
         writeFileSync(path.join(outDir, fileName), source, 'utf8')
       }
+
+      // Pxxl serves the canonical domain. Shipping its routing config inside
+      // `dist` keeps a static upload (Pxxl Drop) working like a repo deploy.
+      const pxxlConfig = path.join(projectRoot, 'pxxl.toml')
+
+      if (existsSync(pxxlConfig)) copyFileSync(pxxlConfig, path.join(outDir, 'pxxl.toml'))
     },
   }
 }
