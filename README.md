@@ -100,9 +100,10 @@ project is still one object — the sitemap, the case-study HTML shell and
   `http://localhost:5173/llms.txt` works while you edit copy.
 - **404** — `dist/404.html` is `noindex, follow` with no canonical, so unknown
   URLs return a real 404 status and still boot the client-side 404 page.
-- **Hosts** — `vercel.json` handles Vercel (`cleanUrls`, cache headers) and
-  `pxxl.toml` handles smartlify.xyz on Pxxl (SPA fallback, cache headers). No
-  catch-all rewrite is needed on either: every real route has a static file.
+- **Hosts** — `vercel.json` is the only routing file, and it has no rewrites:
+  Vercel uses it for `cleanUrls` and cache headers, and Pxxl reads the same file
+  through its Vercel-compatibility layer. Every real route has a static file, so
+  no catch-all rewrite is needed on either host.
 
 The canonical origin lives in `site.seo.url`. Override it per environment with
 `VITE_SITE_URL`:
